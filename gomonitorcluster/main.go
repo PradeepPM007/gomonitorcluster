@@ -11,8 +11,8 @@ import (
 func main() {
 
 	kubeconfig := flag.String("kubeconfig", "", "My kubeconfig path")
-	mynamespace := flag.String("mynamespace", "", "My Namespace")
-	mypod := flag.String("mypod", "", "My Pod")
+	mynamespace := flag.String("mynamespace", "", "My Namespace Name")
+	mypod := flag.String("mypod", "", "My Pod Name")
 	flag.Parse()
 	config, err := clientcmd.BuildConfigFromFlags("", *kubeconfig)
 
@@ -22,10 +22,8 @@ func main() {
 	ClientSet := kubernetes.NewForConfigOrDie(config)
 
 	if ClientSet == nil {
-		log.Println("ClientSet is empty")
-		return
+		panic("ClientSet is empty")
 	}
 
 	ListPodsOnFilters(ClientSet, *mynamespace, *mypod)
-
 }
