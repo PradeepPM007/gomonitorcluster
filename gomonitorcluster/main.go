@@ -19,11 +19,11 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	log.Println("creating ClientSet")
 	ClientSet := kubernetes.NewForConfigOrDie(config)
 
 	if ClientSet == nil {
 		panic("ClientSet is empty")
 	}
-
 	ListPodsOnFilters(ClientSet, *mynamespace, *mypod)
 }
